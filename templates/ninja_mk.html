@@ -1,0 +1,10 @@
+<h1>{{ title }}</h1>
+{% for i in characters %}
+<h2>{{ i.name }}</h2>
+<p>{{ i.nickname }}</p>
+<ul>
+{% for j in i.weapons %}
+<li>{{ j }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
