@@ -1,4 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from . import models
+
+#detail
+def person_detail_view(request, id):
+    if request.method == 'GET':
+        person_id = get_object_or_404(models.PersonMk, id=id)
+    return render(request, 'persons/person_detail.html', {'pers_id': person_id})
+
+
+
+#list
+def person_mk_view(request):
+    if request.method == 'GET':
+        persons = models.PersonMk.objects.all().order_by('-id')
+        news = models.NewsMk.objects.all().order_by('-id')
+    return render(request, 'persons/person_list.html', 
+    {
+        'pers': persons,
+        'news': news
+        
+    })
+
+
+
+
+
+
+
+
+
+
+
+
 
 def person_mk(request):
     if request.method == "GET":

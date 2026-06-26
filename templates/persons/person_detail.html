@@ -1,0 +1,11 @@
+<h1>Имя: {{ pers_id.name }}</h1>
+<img src="{{ pers_id.photo.url }}" alt="" width="250" height="300">
+<p>Возраст: {{ pers_id.age }}</p>
+<p>Царство: {{ pers_id.kindom }}</p>
+{% if pers_id.description %}
+    <p>Описание: {{ pers_id.description }}</p>
+{% else %}
+    <p>Описание: Описание не указано!!!</p>
+{% endif %}
+<a href="{{ pers_id.video_fight }}" target="_blank">Ссылка на бой</a>
+<p>Дата создания поста: {{ pers_id.created_at }}</p>

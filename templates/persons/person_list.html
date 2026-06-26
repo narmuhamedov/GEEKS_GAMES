@@ -1,0 +1,24 @@
+<h1>Персонажи мортал комбат 1 (2023)</h1>
+<ol>
+    {% for i in pers %}
+
+    <li>
+        <img src="{{ i.photo.url }}" alt="" width="250" height="300">
+        <p>Имя: {{ i.name }}</p>
+        <p>Пост создан: {{ i.created_at }}</p>
+        <p><a href="/person_list/{{ i.id }}/">Подробнее</a></p>
+    </li>
+    {% endfor %}
+</ol>
+
+
+<h2>Новости</h2>
+<ul>
+    {% for n in news %}
+    <li>
+        <p>{{ n.title }}</p>
+        <p>{{ n.description }}</p>
+        <p>{{ n.created_at }}</p>
+    </li>
+    {% endfor %}
+</ul>
