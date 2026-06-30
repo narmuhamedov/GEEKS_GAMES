@@ -1,0 +1,36 @@
+<h1>Персонажи</h1>
+{% for i in heros %}
+
+<h2>Имя Персонажа {{ i.name }}</h2>
+<p>Оружие {{ i.weapon }}</p>
+<p>Локация:
+    {% for loc in i.fight_location.all %}
+    {{ loc.name_loc }} {% if not forloop.last %}, {% endif %}
+    {% empty %}
+    Локация не найдена
+    {% endfor %}
+</p>
+
+<h4>Оценки</h4>
+<ul>
+    {% for rev in  i.review.all %}
+        <li>
+            <p>Оценка - {{ rev.marks }}</p>
+            <p>Дата оценки - {{ rev.created_at }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+<h2>Игроки</h2>
+{% for pers in person %}
+
+<p>Имя - {{ pers.name_pers }}</p>
+{% if pers.select_hero %}
+<p>Выбранный игрок - {{ pers.select_hero }}</p>
+{% else %}
+<p>Выбранный игрок - Нету персонажа!</p>
+{% endif %}
+<p>Дата создания - {{ pers.created_at }}</p>
+
+{% endfor %}
