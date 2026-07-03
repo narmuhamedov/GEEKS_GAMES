@@ -1,0 +1,21 @@
+<h1>Участники на соревнования</h1>
+
+<a href="/create_tournament/">Запись на турнир</a>
+
+<ol>
+    {% for i in part %}
+
+    <li>
+        <p>Имя участника - {{ i.name }}</p>
+        <p>Персонаж для соревнования - {{ i.choice_hero }}</p>
+        <a href="{{ i.personal_data.url }}" target="_blank">Паспорт</a>
+        <p>Участник внес - {{ i.cash }}</p>
+        <p>Дата записи - {{ i.created_at }}</p>
+
+        <a href="/participants_list/{{ i.id }}/update/">Изменить</a>
+        <a href="/participants_list/{{ i.id }}/delete/">Удалить</a>
+
+    </li>
+
+    {% endfor %}
+</ol>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mortal_kombat',
     'products',
+    'competitions_mk',
 ]
 
 MIDDLEWARE = [
