@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('mortal_kombat.urls')),
     path('', include('products.urls')),
     path('', include('competitions_mk.urls')),
+    path('', include('users.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

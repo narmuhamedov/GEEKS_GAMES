@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mortal_kombat',
     'products',
     'competitions_mk',
+    'users',
 ]
 
 MIDDLEWARE = [

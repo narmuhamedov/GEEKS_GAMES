@@ -1,0 +1,20 @@
+<h1>Список зарегистрированных пользователей</h1>
+<ul>
+    {% for i in us_lst %}
+
+    <li>
+        <p>Логин:{{ i.username }}</p>
+        <img src="{{ i.photo.url}}" alt="" width="150" height="100">
+        <p>Имя: {{ i.first_name }}</p>
+        <p>Почта: {{ i.email }}</p>
+        <p>Номер телефона: {{ i.phone_number }}</p>
+        <p>Пол: {{ i.gender }}</p>
+    </li>
+
+    {% endfor %}
+</ul>
+
+<form action="/logout/" method="POST">
+    {% csrf_token %}
+    <button type="submit">Выход</button>
+</form>
