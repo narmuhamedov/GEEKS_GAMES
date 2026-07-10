@@ -1,36 +1,276 @@
-<h1>Персонажи</h1>
-{% for i in heros %}
+{% include 'layout/header.html' %}
 
-<h2>Имя Персонажа {{ i.name }}</h2>
-<p>Оружие {{ i.weapon }}</p>
-<p>Локация:
-    {% for loc in i.fight_location.all %}
-    {{ loc.name_loc }} {% if not forloop.last %}, {% endif %}
-    {% empty %}
-    Локация не найдена
-    {% endfor %}
-</p>
+<main class="mk-arena-container">
 
-<h4>Оценки</h4>
-<ul>
-    {% for rev in  i.review.all %}
-        <li>
-            <p>Оценка - {{ rev.marks }}</p>
-            <p>Дата оценки - {{ rev.created_at }}</p>
-        </li>
-    {% endfor %}
-</ul>
-{% endfor %}
+    <!-- СЕКЦИЯ ПЕРСОНАЖЕЙ -->
+    <section class="mk-arena-section">
+        <h1 class="mk-arena-title">Избранные Бойцы</h1>
+        <div class="mk-cards-grid">
+            {% for i in heros %}
+            <div class="mk-fighter-card">
+                <div class="mk-fighter-header">
+                    <h2 class="mk-fighter-name">{{ i.name }}</h2>
+                    <div class="mk-fighter-weapon">Арсенал: <span>{{ i.weapon }}</span></div>
+                </div>
 
-<h2>Игроки</h2>
-{% for pers in person %}
+                <div class="mk-fighter-body">
+                    <!-- Локации -->
+                    <div class="mk-meta-block">
+                        <span class="mk-meta-label">Арены боя:</span>
+                        <p class="mk-meta-value">
+                            {% for loc in i.fight_location.all %}
+                            <span class="mk-loc-tag">{{ loc.name_loc }}</span>{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                            <span class="mk-loc-empty">Неизвестные земли</span>
+                            {% endfor %}
+                        </p>
+                    </div>
 
-<p>Имя - {{ pers.name_pers }}</p>
-{% if pers.select_hero %}
-<p>Выбранный игрок - {{ pers.select_hero }}</p>
-{% else %}
-<p>Выбранный игрок - Нету персонажа!</p>
-{% endif %}
-<p>Дата создания - {{ pers.created_at }}</p>
+                    <!-- Оценки -->
+                    <div class="mk-reviews-block">
+                        <h4 class="mk-reviews-title">Боевые Ранги</h4>
+                        <ul class="mk-reviews-list">
+                            {% for rev in i.review.all %}
+                            <li class="mk-review-item">
+                                <span class="mk-mark">★ {{ rev.marks }}</span>
+                                <span class="mk-mark-date">{{ rev.created_at|date:"d.m.Y" }}</span>
+                            </li>
+                            {% empty %}
+                            <li class="mk-review-empty">Нет оценок</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 
-{% endfor %}
+    <!-- СЕКЦИЯ ИГРОКОВ -->
+    <section class="mk-arena-section">
+        <h2 class="mk-arena-title mk-title-gold">Мастера Арены (Игроки)</h2>
+        <div class="mk-players-grid">
+            {% for pers in person %}
+            <div class="mk-player-card {% if pers.select_hero %}has-hero{% else %}no-hero{% endif %}">
+                <div class="mk-player-info">
+                    <h3 class="mk-player-name">{{ pers.name_pers }}</h3>
+                    <p class="mk-player-date">В сети с: {{ pers.created_at|date:"d.m.Y" }}</p>
+                </div>
+                
+                <div class="mk-player-status">
+                    <span class="mk-status-label">Текущий боец:</span>
+                    {% if pers.select_hero %}
+                    <span class="mk-status-hero">{{ pers.select_hero }}</span>
+                    {% else %}
+                    <span class="mk-status-none">В поиске судьбы</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</main>
+
+<style>
+    /* Основной контейнер */
+.mk-arena-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: 80vh;
+}
+
+.mk-arena-section {
+    margin-bottom: 70px;
+}
+
+/* Стили заголовков */
+.mk-arena-title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+    border-bottom: 2px solid #ff4500;
+    padding-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+}
+
+.mk-arena-title.mk-title-gold {
+    border-bottom-color: #cca300;
+    text-shadow: 0 0 10px rgba(204, 163, 0, 0.3);
+}
+
+/* Сетка карточек бойцов */
+.mk-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Карточка бойца */
+.mk-fighter-card {
+    background: linear-gradient(135deg, #141414 0%, #090909 100%);
+    border: 1px solid #252525;
+    border-left: 4px solid #ff4500;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+}
+
+.mk-fighter-card:hover {
+    border-color: #ff4500;
+    transform: translateX(4px);
+    box-shadow: -5px 5px 15px rgba(255, 69, 0, 0.1);
+}
+
+/* Инфо бойца */
+.mk-fighter-name {
+    color: #fff;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.mk-fighter-weapon {
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.mk-fighter-weapon span {
+    color: #cca300;
+    font-weight: bold;
+}
+
+/* Теги и метаданные */
+.mk-fighter-body {
+    margin-top: 15px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+}
+
+.mk-meta-block {
+    margin-bottom: 15px;
+}
+
+.mk-meta-label {
+    color: #555;
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.mk-loc-tag {
+    color: #fff;
+    font-size: 14px;
+}
+
+.mk-loc-empty {
+    color: #ff4500;
+    font-style: italic;
+    font-size: 13px;
+}
+
+/* Блок отзывов */
+.mk-reviews-title {
+    color: #666;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.mk-reviews-list {
+    list-style: none;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.mk-review-item {
+    display: flex;
+    justify-content: space-between;
+    background: #0f0f0f;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    border-right: 2px solid #cca300;
+}
+
+.mk-mark {
+    color: #cca300;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.mk-mark-date {
+    color: #444;
+    font-size: 11px;
+}
+
+.mk-review-empty {
+    color: #444;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* СЕКЦИЯ ИГРОКОВ */
+.mk-players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.mk-player-card {
+    background: #0d0d0d;
+    border: 1px solid #222;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* Если у игрока выбран герой — рамка подсвечивается зеленым/синим, если нет — тускло-красным */
+.mk-player-card.has-hero {
+    border-bottom: 3px solid #00ff66;
+}
+
+.mk-player-card.no-hero {
+    border-bottom: 3px solid #ff3333;
+}
+
+.mk-player-name {
+    color: #fff;
+    font-size: 16px;
+}
+
+.mk-player-date {
+    color: #444;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.mk-status-label {
+    color: #555;
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+}
+
+.mk-status-hero {
+    color: #00ff66;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.mk-status-none {
+    color: #ff3333;
+    font-size: 13px;
+    font-style: italic;
+}
+
+</style>
+
+{% include 'layout/footer.html' %}

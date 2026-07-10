@@ -1,0 +1,93 @@
+    <footer class="mk-footer">
+        <div class="mk-footer-top">
+            <div class="mk-footer-logo">FATALITY</div>
+            <div class="mk-footer-social">
+                <a href="#vk" class="mk-soc-link">VK</a>
+                <a href="#tg" class="mk-soc-link">TG</a>
+                <a href="#yt" class="mk-soc-link">YT</a>
+            </div>
+        </div>
+        <div class="mk-footer-bottom">
+            <p>&copy; 2026 ВЫБЕРИ СВОЮ СУДЬБУ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+            <p class="mk-warning">ВНИМАНИЕ: ЖЕСТОКИЙ КОНТЕНТ 18+</p>
+        </div>
+    </footer>
+
+<style>
+    /* Контейнер футера */
+.mk-footer {
+    background: linear-gradient(0deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-top: 3px solid #ff4500;
+    padding: 30px 50px 20px 50px;
+    margin-top: 50px; /* Отступ от контента страницы */
+    box-shadow: 0 -4px 15px rgba(255, 69, 0, 0.2);
+}
+
+/* Верхняя часть футера */
+.mk-footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Логотип в футере */
+.mk-footer-logo {
+    color: #ff0000;
+    font-size: 22px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px #ff0000;
+}
+
+/* Блок соцсетей */
+.mk-footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+/* Ссылки на соцсети */
+.mk-soc-link {
+    color: #cca300;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #cca300;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.mk-soc-link:hover {
+    color: #fff;
+    background-color: #ff4500;
+    border-color: #ff4500;
+    box-shadow: 0 0 10px #ff4500;
+}
+
+/* Нижня часть футера */
+.mk-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Предупреждение */
+.mk-warning {
+    color: #ff4500;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 600px) {
+    .mk-footer-top, .mk-footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+</style>

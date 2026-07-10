@@ -1,5 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . import models, forms
+from django.http import HttpResponse
+from django.core.paginator import Paginator
+
+#search
+def search_view(request):
+    query = request.GET.get('s', '')
+    if query:
+        participant = models.Participants.objects.filter(name__icontains=query)
+        if not participant.exists():
+            return HttpResponse('Человек не найден')
+    else:
+        return HttpResponse('Человек не найден')
+
+    return render(request, 'crud/read.html', {'part': participant})
+
+
+
+
 
 #create
 def create_participant_view(request):
@@ -16,7 +34,11 @@ def create_participant_view(request):
 def participant_list_view(request):
     if request.method == "GET":
         participant = models.Participants.objects.all().order_by('-id')
-    return render(request, 'crud/read.html', {'part': participant})
+        paginator = Paginator(participant, 2)
+        page = request.GET.get('page')
+        page_obj = paginator.get_page(page)
+
+    return render(request, 'crud/read.html', {'part': page_obj})
 
 #update
 def update_participant_view(request, id):

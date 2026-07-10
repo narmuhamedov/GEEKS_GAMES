@@ -1,12 +1,19 @@
 <h1>Участники на соревнования</h1>
 
+
+<form action="/search/" method="GET">
+    <input type="text" type="search" name="s" placeholder="имя участника">
+    <button type="submit">Поиск</button>
+</form>
+
+
 <a href="/create_tournament/">Запись на турнир</a>
 
 <ol>
     {% for i in part %}
 
     <li>
-        <p>Имя участника - {{ i.name }}</p>
+        <b><p>Имя участника - {{ i.name }}</p></b>
         <p>Персонаж для соревнования - {{ i.choice_hero }}</p>
         <a href="{{ i.personal_data.url }}" target="_blank">Паспорт</a>
         <p>Участник внес - {{ i.cash }}</p>
@@ -19,3 +26,21 @@
 
     {% endfor %}
 </ol>
+
+<div class="pagination">
+        <span class="step-links">
+            {% if part.has_previous %}
+                <a href="?page=1">&laquo; Первая</a>
+                <a href="?page={{ part.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ part.number }} из {{ part.paginator.num_pages }}.
+            </span>
+
+            {% if part.has_next %}
+                <a href="?page={{ part.next_page_number }}">Следующая</a>
+                <a href="?page={{ part.paginator.num_pages }}">Последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>

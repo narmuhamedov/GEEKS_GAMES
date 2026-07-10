@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortal Kombat Navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="mk-nav">
+        <div class="mk-logo">MK</div>
+        <ul class="mk-menu">
+            <li><a href="/" class="mk-link">Главная</a></li>
+            <li><a href="{% url 'mk_list' %}" class="mk-link">Персонажи</a></li>
+            <li><a href="{% url 'hero' %}" class="mk-link">Список героев</a></li>
+            <li><a href="#tournaments" class="mk-link">Соревнования</a></li>
+        </ul>
+        <div class="mk-auth">
+            <a href="#register" class="mk-btn mk-btn-reg">Регистрация</a>
+            <a href="#login" class="mk-btn mk-btn-login">Авторизация</a>
+        </div>
+    </nav>
+
+
+<style>
+    /* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial Black', Impact, sans-serif;
+}
+
+body {
+    background-color: #111;
+}
+
+/* Контейнер панели */
+.mk-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 15px 30px;
+    border-bottom: 3px solid #ff4500;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+}
+
+/* Логотип */
+.mk-logo {
+    color: #ff4500;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff0000;
+    letter-spacing: 2px;
+}
+
+/* Списки меню */
+.mk-menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+/* Ссылки */
+.mk-link {
+    color: #cca300;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.mk-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px #ff4500;
+}
+
+/* Блок авторизации */
+.mk-auth {
+    display: flex;
+    gap: 15px;
+}
+
+/* Кнопки */
+.mk-btn {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Кнопка регистрации (огненная) */
+.mk-btn-reg {
+    background-color: #ff4500;
+    color: #fff;
+    box-shadow: 0 0 5px #ff4500;
+}
+
+.mk-btn-reg:hover {
+    background-color: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+/* Кнопка авторизации (темная) */
+.mk-btn-login {
+    background-color: transparent;
+    color: #cca300;
+    border-color: #cca300;
+}
+
+.mk-btn-login:hover {
+    background-color: #cca300;
+    color: #000;
+    box-shadow: 0 0 10px #cca300;
+}
+
+</style>

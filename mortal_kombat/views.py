@@ -1,10 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from . import models
+from django.db.models import F
 
 #detail
 def person_detail_view(request, id):
     if request.method == 'GET':
         person_id = get_object_or_404(models.PersonMk, id=id)
+
+        views_blog = request.session.get('viewed_blog', [])
+
+        if id not in views_blog:
+            person_id.views = F("views")+1
+            person_id.save()
+            person_id.refresh_from_db()
+        views_blog.append(id)
+        request.session['viewed_blog'] = views_blog
+
+
     return render(request, 'persons/person_detail.html', {'pers_id': person_id})
 
 

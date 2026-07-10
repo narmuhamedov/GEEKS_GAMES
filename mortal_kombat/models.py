@@ -40,6 +40,8 @@ class PersonMk(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
 
+    views = models.PositiveIntegerField(default=0, null=True)
+
     class Meta:
         verbose_name = 'персонажа'
         verbose_name_plural = 'персонажи'
