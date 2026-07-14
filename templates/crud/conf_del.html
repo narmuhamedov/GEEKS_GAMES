@@ -1,0 +1,8 @@
+<h1>Вы действительно хотите удалить участника - {{ part_id.name }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit">Да</button>  
+</form>
+
+<a href="{% url 'read' %}">Нет</a>
