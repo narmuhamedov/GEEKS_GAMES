@@ -1,11 +1,10 @@
+{% include 'layout/header.html' %}
 <h1>Участники на соревнования</h1>
-
 
 <form action="/search/" method="GET">
     <input type="text" type="search" name="s" placeholder="имя участника">
     <button type="submit">Поиск</button>
 </form>
-
 
 <a href="/create_tournament/">Запись на турнир</a>
 
@@ -44,3 +43,177 @@
             {% endif %}
         </span>
     </div>
+
+{% include 'layout/footer.html' %}
+
+<style>
+    /* Базовые стили для контента */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #333;
+        line-height: 1.5;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        background-color: #f9f9f9;
+    }
+
+    h1 {
+        color: #222;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+    }
+
+    /* Форма поиска */
+    form[action="/search/"] {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    form[action="/search/"] input[type="search"] {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+    }
+
+    form[action="/search/"] input[type="search"]:focus {
+        border-color: #0066cc;
+        outline: none;
+    }
+
+    form[action="/search/"] button {
+        padding: 10px 20px;
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    form[action="/search/"] button:hover {
+        background-color: #0052a3;
+    }
+
+    /* Ссылка на создание турнира */
+    a[href="/create_tournament/"] {
+        display: inline-block;
+        margin-bottom: 30px;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+
+    a[href="/create_tournament/"]:hover {
+        background-color: #218838;
+    }
+
+    /* Список участников */
+    ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    ol li {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border: 1px solid #e8e8e8;
+        position: relative;
+    }
+
+    ol li p {
+        margin: 8px 0;
+        color: #555;
+    }
+
+    ol li b p {
+        color: #111;
+        font-size: 1.15rem;
+        margin-top: 0;
+    }
+
+    /* Ссылки внутри карточки участника */
+    ol li a {
+        display: inline-block;
+        margin-right: 15px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    /* Ссылка на паспорт */
+    ol li a[target="_blank"] {
+        color: #17a2b8;
+        margin-bottom: 10px;
+    }
+    ol li a[target="_blank"]:hover {
+        text-decoration: underline;
+    }
+
+    /* Кнопки Изменить и Удалить */
+    ol li a[href*="/update/"] {
+        color: #ffc107;
+        background: #fff8e1;
+        padding: 4px 12px;
+        border-radius: 4px;
+        border: 1px solid #ffe082;
+    }
+    ol li a[href*="/update/"]:hover {
+        background: #ffe082;
+    }
+
+    ol li a[href*="/delete/"] {
+        color: #dc3545;
+        background: #fdf2f2;
+        padding: 4px 12px;
+        border-radius: 4px;
+        border: 1px solid #fde8e8;
+    }
+    ol li a[href*="/delete/"]:hover {
+        background: #fde8e8;
+    }
+
+    /* Пагинация */
+    .pagination {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .step-links a {
+        color: #0066cc;
+        text-decoration: none;
+        padding: 6px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        margin: 0 2px;
+    }
+
+    .step-links a:hover {
+        background: #f0f0f0;
+    }
+
+    .current {
+        margin: 0 10px;
+        font-weight: bold;
+        color: #666;
+    }
+</style>
